@@ -35,7 +35,7 @@ $int = 0;
 foreach ($array as $value) {
 	$ultimo = explode("<td>", $value);
 	if ($int > 1) {
-		$resultado = $funciones->query($sql, array('ssdddddddd',strip_tags($ultimo[1]),strip_tags($ultimo[2]),sana($ultimo[3]),sana($ultimo[4]),sana($ultimo[5]),sana($ultimo[6]),sana($ultimo[7]),sana($ultimo[8]),sana($ultimo[9]),sana($ultimo[10])),true);
+		$resultado = $funciones->query($sql, array('ssdddddddd',trim(strip_tags($ultimo[1])),trim(strip_tags($ultimo[2])),sana($ultimo[3]),sana($ultimo[4]),sana($ultimo[5]),sana($ultimo[6]),sana($ultimo[7]),sana($ultimo[8]),sana($ultimo[9]),sana($ultimo[10])),true);
 	}
 	$int++;
 }
