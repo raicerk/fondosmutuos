@@ -1,7 +1,20 @@
 <?php
 
+date_default_timezone_set("Chile/Continental");
+
 include 'sistema/class.controlador.php';
 $funciones = new Funciones();
+
+function fecha(){
+	$fecha = date('Y-m-d');
+	if (date("D") == "Mon") {
+		$nuevafecha = strtotime ( '-3 day' , strtotime ( $fecha ) ) ;
+	}else{
+		$nuevafecha = strtotime ( '-1 day' , strtotime ( $fecha ) ) ;
+	}
+	$nuevafecha = date ( 'Y-m-d' , $nuevafecha);
+	return $nuevafecha;
+}
 
 function sana($numero){
 	$valor = filter_var(strip_tags($numero), FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_THOUSAND);
@@ -17,7 +30,7 @@ $nuevo = strip_tags($tabla,"<tr><td>");
 $nuevo = str_replace(' align="right"', "", $nuevo);
 $array = explode("<tr>", $nuevo);
 $cadena = "";
-$sql = "INSERT INTO mutuos (fondo,administradora,valor,porcentaje_variacion_dia,porcentaje_nominal_treita_dias,porcentaje_real_UF_treinta_dias,porcentaje_nominal_tres_meses,porcentaje_real_UF_tres_meses,porcentaje_nominal_un_ano,porcentaje_real_UF_un_ano,fecha,hora) VALUES (?,?,?,?,?,?,?,?,?,?,'".date('Y-m-d')."','".date('H:i:s')."');";
+$sql = "INSERT INTO mutuos (fondo,administradora,valor,porcentaje_variacion_dia,porcentaje_nominal_treita_dias,porcentaje_real_UF_treinta_dias,porcentaje_nominal_tres_meses,porcentaje_real_UF_tres_meses,porcentaje_nominal_un_ano,porcentaje_real_UF_un_ano,fecha,hora) VALUES (?,?,?,?,?,?,?,?,?,?,'".fecha()."','".date('H:i:s')."');";
 $int = 0;
 foreach ($array as $value) {
 	$ultimo = explode("<td>", $value);
